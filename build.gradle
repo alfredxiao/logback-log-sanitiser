@@ -1,0 +1,21 @@
+plugins {
+	id 'java'
+}
+
+group = 'xiaoyf.demo.logback-log-sanitiser'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	maven { url "https://packages.confluent.io/maven/" }
+}
+
+dependencies {
+	compile 'ch.qos.logback:logback-classic:1.2.3'
+}
+
+test {
+	useJUnitPlatform()
+}
