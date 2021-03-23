@@ -5,7 +5,6 @@ import ch.qos.logback.classic.spi.StackTraceElementProxy;
 
 public class SanitisedThrowableProxy implements IThrowableProxy {
     private final IThrowableProxy proxy;
-    private final CardNumberMasker masker = new CardNumberMasker();
 
     public SanitisedThrowableProxy(IThrowableProxy proxy) {
         this.proxy = proxy;
@@ -16,7 +15,7 @@ public class SanitisedThrowableProxy implements IThrowableProxy {
         if (proxy.getMessage() == null) {
             return null;
         }
-        return masker.mask(proxy.getMessage());
+        return CardNumberMasker.mask(proxy.getMessage());
     }
 
     @Override

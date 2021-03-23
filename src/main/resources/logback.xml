@@ -4,11 +4,11 @@
     <conversionRule conversionWord="sanException" converterClass="xiaoyf.demo.logback_log_sanitiser.ThrowableMessageSanitiser"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
+        <encoder>
             <Pattern>
-                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %sanMsg | %sanException %n
+                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %sanMsg %sanException %n
             </Pattern>
-        </layout>
+        </encoder>
     </appender>
 
     <root level="INFO">

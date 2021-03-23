@@ -3,12 +3,15 @@ package xiaoyf.demo.logback_log_sanitiser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CardNumberMasker {
+public final class CardNumberMasker {
 
     private static final String CREDIT_CARD_PATTERN = "s*\\d{1,5}\\s*(?:-*\\s*,*\\d{1,5}\\s*){1,4}";
     private static final Pattern pattern = Pattern.compile(CREDIT_CARD_PATTERN);
 
-    public String mask(String formattedMessage) {
+    private CardNumberMasker() {
+    }
+
+    public static String mask(String formattedMessage) {
         Matcher matcher = pattern.matcher(formattedMessage);
         while (matcher.find()) {
             String found = matcher.group();
@@ -25,12 +28,12 @@ public class CardNumberMasker {
         return formattedMessage;
     }
 
-    private String removeSpecials(String cardNumber) {
+    private static String removeSpecials(String cardNumber) {
         cardNumber = cardNumber.replaceAll("[^\\d ]", "").replaceAll("\\s", "");
         return cardNumber;
     }
 
-    private boolean luhnCheck(String cardNumber) {
+    private static boolean luhnCheck(String cardNumber) {
         int sum = 0;
         boolean doubled = false;
         for (int i = cardNumber.length() - 1; i >= 0; --i) {

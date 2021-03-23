@@ -1,10 +1,20 @@
 plugins {
 	id 'java'
+	id 'application'
+	id "com.github.johnrengelman.shadow" version "6.1.0"
+}
+
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+shadowJar {
+	mainClassName = 'xiaoyf.demo.logback_log_sanitiser.Main'
 }
 
 group = 'xiaoyf.demo.logback-log-sanitiser'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
 
 repositories {
 	mavenLocal()
@@ -14,6 +24,7 @@ repositories {
 
 dependencies {
 	compile 'ch.qos.logback:logback-classic:1.2.3'
+	compile 'org.slf4j:slf4j-api:1.7.30'
 }
 
 test {
