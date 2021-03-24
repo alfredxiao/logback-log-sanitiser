@@ -9,7 +9,7 @@ public class MessageSanitiser extends MessageConverter {
 
     public String convert(ILoggingEvent event) {
         // When an exception is not there, we do not touch the message (performance consideration)
-        // e.g. when log.info("some message do not mask")
+        // e.g. when log.info("some message do not mask") or log.error("some message do not mask")
 
         if (Objects.isNull(event.getThrowableProxy())) {
             return event.getFormattedMessage();
