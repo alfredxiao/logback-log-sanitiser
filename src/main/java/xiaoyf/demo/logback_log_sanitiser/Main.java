@@ -21,6 +21,8 @@ public class Main {
         try {
             Exception cause3 = new IllegalArgumentException("OS error card number 6011087959844029");
             Exception cause2 = new IOException("Network error while processing card number 4335933775050909", cause3);
+            Exception suppressed = new RuntimeException("You don't need to know this 6011087959844029");
+            cause2.addSuppressed(suppressed);
             Exception cause1 = new SQLException("IO processing card number 342272131049605", cause2);
             throw new RuntimeException("Application error occurred with card number 5479543628277105 - bad card", cause1);
         } catch(Exception e) {

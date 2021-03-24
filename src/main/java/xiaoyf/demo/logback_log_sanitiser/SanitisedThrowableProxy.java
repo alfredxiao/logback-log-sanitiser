@@ -3,6 +3,8 @@ package xiaoyf.demo.logback_log_sanitiser;
 import ch.qos.logback.classic.spi.IThrowableProxy;
 import ch.qos.logback.classic.spi.StackTraceElementProxy;
 
+import java.util.Objects;
+
 public class SanitisedThrowableProxy implements IThrowableProxy {
     private final IThrowableProxy proxy;
 
@@ -46,6 +48,16 @@ public class SanitisedThrowableProxy implements IThrowableProxy {
 
     @Override
     public IThrowableProxy[] getSuppressed() {
-        return proxy.getSuppressed();
+        IThrowableProxy[] suppressed = proxy.getSuppressed();
+        if (Objects.isNull(suppressed)) {
+            return null;
+        }
+
+        IThrowableProxy[] suppressedAndMarked = new IThrowableProxy[suppressed.length];
+        for (int i = 0; i < suppressed.length; i++) {
+            suppressedAndMarked[i] = new SanitisedThrowableProxy(suppressed[i]);
+        }
+
+        return suppressedAndMarked;
     }
 }
